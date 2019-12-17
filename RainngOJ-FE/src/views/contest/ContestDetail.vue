@@ -7,18 +7,18 @@
         <div v-html="contest.description">{{contest.description}}</div>
       </el-card>
 
-      <el-table id="contest-problem-list" :data="contest.problems" stripe>
-        <el-table-column prop="id" label="ID" width="75px"/>
+      <el-table :data="contest.problems" id="contest-problem-list" stripe>
+        <el-table-column label="ID" prop="id" width="75px"/>
 
-        <el-table-column prop="title" label="标题">
+        <el-table-column label="标题" prop="title">
           <template slot-scope="scope">
-            <span class="cursor-pointer" @click="showProblem(scope.row.id)">{{scope.row.title}}</span>
+            <span @click="showProblem(scope.row.id)" class="cursor-pointer">{{scope.row.title}}</span>
           </template>
         </el-table-column>
 
-        <el-table-column prop="solvedCount" label="正确" width="75px"/>
-        <el-table-column prop="submitCount" label="提交" width="75px"/>
-        <el-table-column prop="ratio" label="正确率" width="75px"/>
+        <el-table-column label="正确" prop="solvedCount" width="75px"/>
+        <el-table-column label="提交" prop="submitCount" width="75px"/>
+        <el-table-column label="正确率" prop="ratio" width="75px"/>
 
       </el-table>
     </t-zoom-in-top>

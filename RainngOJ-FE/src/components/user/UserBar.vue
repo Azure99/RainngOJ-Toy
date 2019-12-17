@@ -3,17 +3,17 @@
     <div id="nav-user-bar">
       <t-zoom-in-top>
         <div v-if="!this.$store.state.status.isLogin">
-          <el-button type="primary" icon="el-icon-user" round @click="loginDialog">登录</el-button>
-          <el-button type="success" icon="el-icon-edit" round @click="register">注册</el-button>
+          <el-button @click="loginDialog" icon="el-icon-user" round type="primary">登录</el-button>
+          <el-button @click="register" icon="el-icon-edit" round type="success">注册</el-button>
         </div>
         <div v-else>
-          <el-button type="primary" round>{{this.$store.state.status.username}}</el-button>
-          <el-button type="info" round @click="logout">注销</el-button>
+          <el-button round type="primary">{{this.$store.state.status.username}}</el-button>
+          <el-button @click="logout" round type="info">注销</el-button>
         </div>
       </t-zoom-in-top>
     </div>
 
-    <el-dialog title="登录" :visible.sync="loginDialogShow" width="30%">
+    <el-dialog :visible.sync="loginDialogShow" title="登录" width="30%">
       <user-login/>
     </el-dialog>
   </div>

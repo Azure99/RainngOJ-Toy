@@ -5,10 +5,10 @@
         <el-input v-model="loginForm.username"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="loginForm.password" show-password></el-input>
+        <el-input show-password v-model="loginForm.password"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button id="user-login-submit" type="primary" @click="login">登录</el-button>
+        <el-button @click="login" id="user-login-submit" type="primary">登录</el-button>
       </el-form-item>
     </el-form>
   </div>

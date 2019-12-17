@@ -2,21 +2,21 @@
   <div id="problem-submit">
     <div id="problem-submit-head">
       编程语言:
-      <el-select v-model="language" placeholder="请选择您的语言">
+      <el-select placeholder="请选择您的语言" v-model="language">
         <el-option
-          v-for="item in langOptions"
           :key="item.value"
           :label="item.label"
-          :value="item.value">
+          :value="item.value"
+          v-for="item in langOptions">
         </el-option>
       </el-select>
       <el-button @click="submitCode">提交代码</el-button>
     </div>
     <div id="problem-submit-code">
       <el-input
-        type="textarea"
         :rows="25"
         placeholder="请粘贴代码"
+        type="textarea"
         v-model="sourceCode">
       </el-input>
     </div>

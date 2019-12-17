@@ -1,12 +1,12 @@
 <template>
   <div id="user-register-form">
     <h2>用户注册</h2>
-    <el-form label-position="right" label-width="auto" :model="form" :rules="rules" ref="form">
+    <el-form :model="form" :rules="rules" label-position="right" label-width="auto" ref="form">
       <el-form-item label="用户名" prop="username">
         <el-input v-model="form.username"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="form.password" show-password></el-input>
+        <el-input show-password v-model="form.password"></el-input>
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
         <el-input v-model="form.email"></el-input>
@@ -18,7 +18,7 @@
         <el-input v-model="form.school"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="register">注册</el-button>
+        <el-button @click="register" type="primary">注册</el-button>
       </el-form-item>
     </el-form>
   </div>

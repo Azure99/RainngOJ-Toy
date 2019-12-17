@@ -1,24 +1,24 @@
 <template>
   <div id="contest-list" v-loading="loading">
     <t-zoom-in-top>
-      <el-pagination id="contest-list-pagination" layout="prev, pager, next"
-                     background element-loading-spinner="el-icon-more-outline"
-                     v-show="itemCount > pageSize" :page-size="pageSize"
-                     :total="itemCount" @current-change="getPage">
+      <el-pagination :page-size="pageSize" :total="itemCount"
+                     @current-change="getPage" background
+                     element-loading-spinner="el-icon-more-outline" id="contest-list-pagination"
+                     layout="prev, pager, next" v-show="itemCount > pageSize">
       </el-pagination>
 
       <el-table :data="tableData" stripe>
-        <el-table-column prop="id" label="ID" width="75px"/>
+        <el-table-column label="ID" prop="id" width="75px"/>
 
-        <el-table-column prop="title" label="标题">
+        <el-table-column label="标题" prop="title">
           <template slot-scope="scope">
-            <span class="cursor-pointer" @click="showContest(scope.row)">{{scope.row.title}}</span>
+            <span @click="showContest(scope.row)" class="cursor-pointer">{{scope.row.title}}</span>
           </template>
         </el-table-column>
 
-        <el-table-column prop="status" label="状态" width="160px"/>
-        <el-table-column prop="startTime" label="开始时间" width="160px"/>
-        <el-table-column prop="endTime" label="截止时间" width="160px"/>
+        <el-table-column label="状态" prop="status" width="160px"/>
+        <el-table-column label="开始时间" prop="startTime" width="160px"/>
+        <el-table-column label="截止时间" prop="endTime" width="160px"/>
 
       </el-table>
     </t-zoom-in-top>

@@ -7,8 +7,8 @@
         <span><i class="el-icon-pie-chart"></i>内存{{solution.memoryCost}}KB</span>&nbsp;
         <status-result :status="solution"/>
       </div>
-      <el-button v-clipboard:copy="solution.sourceCode" v-clipboard:success="onCopySuccess"
-                 v-clipboard:error="onCopyError" size="largs">复制
+      <el-button size="largs" v-clipboard:copy="solution.sourceCode"
+                 v-clipboard:error="onCopyError" v-clipboard:success="onCopySuccess">复制
       </el-button>
       <el-card id="solution-code" shadow="always">
         <pre>{{solution.sourceCode}}</pre>

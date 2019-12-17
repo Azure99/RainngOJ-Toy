@@ -1,40 +1,40 @@
 <template>
   <div id="status-list" v-loading="loading">
     <t-zoom-in-top>
-      <el-pagination id="status-list-pagination" layout="prev, pager, next"
-                     background element-loading-spinner="el-icon-more-outline"
-                     v-show="itemCount > pageSize"
-                     :page-size="pageSize" :total="itemCount" @current-change="getPage">
+      <el-pagination :page-size="pageSize" :total="itemCount"
+                     @current-change="getPage" background
+                     element-loading-spinner="el-icon-more-outline"
+                     id="status-list-pagination" layout="prev, pager, next" v-show="itemCount > pageSize">
       </el-pagination>
 
       <el-table :data="tableData" stripe>
-        <el-table-column prop="id" label="提交Id" width="85px" align="center"/>
-        <el-table-column prop="problemId" label="题目Id" width="80px" align="center">
+        <el-table-column align="center" label="提交Id" prop="id" width="85px"/>
+        <el-table-column align="center" label="题目Id" prop="problemId" width="80px">
           <template slot-scope="scope">
-            <span class="status-list-problemid" @click="showProblem(scope.row.problemId)">{{scope.row.problemId}}</span>
+            <span @click="showProblem(scope.row.problemId)" class="status-list-problemid">{{scope.row.problemId}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="username" label="用户名" align="center"/>
+        <el-table-column align="center" label="用户名" prop="username"/>
 
-        <el-table-column prop="result" label="结果" align="center">
+        <el-table-column align="center" label="结果" prop="result">
           <template slot-scope="scope">
             <status-result :status="scope.row"/>
           </template>
         </el-table-column>
 
-        <el-table-column prop="timeCost" label="时间" width="90px" align="center"/>
-        <el-table-column prop="memoryCost" label="内存" width="95px" align="center"/>
-        <el-table-column prop="language" label="语言" width="80px" align="center">
+        <el-table-column align="center" label="时间" prop="timeCost" width="90px"/>
+        <el-table-column align="center" label="内存" prop="memoryCost" width="95px"/>
+        <el-table-column align="center" label="语言" prop="language" width="80px">
           <template slot-scope="scope">
-            <span v-if="currentUsername === scope.row.username || isAdmin"
-                  class="status-list-language" @click="showSolution(scope.row.id)">
+            <span @click="showSolution(scope.row.id)"
+                  class="status-list-language" v-if="currentUsername === scope.row.username || isAdmin">
               {{scope.row.language}}
             </span>
             <span v-else>{{scope.row.language}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="codeLength" label="长度" width="70px" align="center"/>
-        <el-table-column prop="submitTime" label="提交时间" width="155px" align="center"/>
+        <el-table-column align="center" label="长度" prop="codeLength" width="70px"/>
+        <el-table-column align="center" label="提交时间" prop="submitTime" width="155px"/>
       </el-table>
 
     </t-zoom-in-top>

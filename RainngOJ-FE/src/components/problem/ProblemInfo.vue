@@ -30,8 +30,8 @@
           <template slot="title">
             <div class="collapse-title">样例输入</div>
           </template>
-          <el-button v-clipboard:copy="problem.sampleInput" v-clipboard:success="onCopySuccess"
-                     v-clipboard:error="onCopyError" size="small">复制
+          <el-button size="small" v-clipboard:copy="problem.sampleInput"
+                     v-clipboard:error="onCopyError" v-clipboard:success="onCopySuccess">复制
           </el-button>
           <el-card class="box-card" shadow="hover">
             <div class="collapse-content">
@@ -43,8 +43,8 @@
           <template slot="title">
             <div class="collapse-title">样例输出</div>
           </template>
-          <el-button v-clipboard:copy="problem.sampleOutput" v-clipboard:success="onCopySuccess"
-                     v-clipboard:error="onCopyError" size="small">复制
+          <el-button size="small" v-clipboard:copy="problem.sampleOutput"
+                     v-clipboard:error="onCopyError" v-clipboard:success="onCopySuccess">复制
           </el-button>
           <el-card class="box-card" shadow="hover">
             <div class="collapse-content">
@@ -103,6 +103,7 @@ export default {
   .el-card {
     border: 2px solid #EBEEF5;
   }
+
   pre {
     margin: 0;
     font-size: 16px;

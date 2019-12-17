@@ -1,14 +1,14 @@
 <template>
   <div id="top-users">
-    <el-table id="top-users-table" :data="tableData" size="mini" height="400px" stripe
+    <el-table :data="tableData" height="400px" id="top-users-table" size="mini" stripe
               v-loading="loading">
-      <el-table-column prop="rank" label="#" width="37px">
+      <el-table-column label="#" prop="rank" width="37px">
       </el-table-column>
 
-      <el-table-column prop="username" label="用户" align="center">
+      <el-table-column align="center" label="用户" prop="username">
       </el-table-column>
 
-      <el-table-column prop="solvedCount" label="解决" width="50px">
+      <el-table-column label="解决" prop="solvedCount" width="50px">
       </el-table-column>
     </el-table>
   </div>

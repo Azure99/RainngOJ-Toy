@@ -1,14 +1,14 @@
 <template>
   <div id="news-carousel">
-    <el-carousel class="news-carousel" height="150px" element-loading-background="#364D79"
+    <el-carousel class="news-carousel" element-loading-background="#364D79" height="150px"
                  v-loading="loading">
-      <el-carousel-item class="carousel-item" v-for="item in data" :key="item.id">
+      <el-carousel-item :key="item.id" class="carousel-item" v-for="item in data">
         <div class="carousel-item-container">
 
           <div class="carousel-item-title">{{ item.title }}</div>
           <div class="carousel-item-content">{{ item.content }}</div>
           <div class="carousel-item-button">
-            <el-button size="mini" @click="showNews(item.id)" round v-show="item.content.length > 35">
+            <el-button @click="showNews(item.id)" round size="mini" v-show="item.content.length > 35">
               查看更多
             </el-button>
           </div>

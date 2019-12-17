@@ -1,7 +1,7 @@
 <template>
-  <span class="status-list-result"
-        :style="{backgroundColor: getResultColorById(status.result)}"
-        @click="showError(status.id, status.result)">
+  <span :style="{backgroundColor: getResultColorById(status.result)}"
+        @click="showError(status.id, status.result)"
+        class="status-list-result">
     {{getResultNameById(status.result)}}
     <img class="status-list-working" src="@/assets/working.gif" v-if="isRunning(status.result)"/>
   </span>

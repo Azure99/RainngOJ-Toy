@@ -1,23 +1,23 @@
 <template>
   <div id="rank-list" v-loading="loading">
     <t-zoom-in-top>
-      <el-pagination id="rank-list-pagination" layout="prev, pager, next" background
-                     element-loading-spinner="el-icon-more-outline"
-                     v-show="itemCount > pageSize" :page-size="pageSize"
-                     :total="itemCount" @current-change="getPage">
+      <el-pagination :page-size="pageSize" :total="itemCount" @current-change="getPage"
+                     background
+                     element-loading-spinner="el-icon-more-outline" id="rank-list-pagination"
+                     layout="prev, pager, next" v-show="itemCount > pageSize">
       </el-pagination>
 
-      <el-table stripe :data="tableData">
+      <el-table :data="tableData" stripe>
 
-        <el-table-column prop="rank" label="排名" width="75px"/>
-        <el-table-column prop="username" label="用户名" width="150px"/>
-        <el-table-column prop="nickname" label="昵称"/>
-        <el-table-column prop="solvedCount" label="正确" width="75px"/>
-        <el-table-column prop="submitCount" label="提交" width="75px"/>
-        <el-table-column prop="ratio" label="正确率" width="75px"/>
-        <el-table-column v-if="isAdmin" label="操作" width="60px">
+        <el-table-column label="排名" prop="rank" width="75px"/>
+        <el-table-column label="用户名" prop="username" width="150px"/>
+        <el-table-column label="昵称" prop="nickname"/>
+        <el-table-column label="正确" prop="solvedCount" width="75px"/>
+        <el-table-column label="提交" prop="submitCount" width="75px"/>
+        <el-table-column label="正确率" prop="ratio" width="75px"/>
+        <el-table-column label="操作" v-if="isAdmin" width="60px">
           <template slot-scope="scope">
-            <span class="user-lock-unlock" @click="lockOrUnlock(scope.row)">{{scope.row.locked ? '解封' : '封禁'}}</span>
+            <span @click="lockOrUnlock(scope.row)" class="user-lock-unlock">{{scope.row.locked ? '解封' : '封禁'}}</span>
           </template>
         </el-table-column>
 

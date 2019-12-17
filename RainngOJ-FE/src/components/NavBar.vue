@@ -8,11 +8,11 @@
       </el-col>
 
       <el-col :span="14">
-        <el-menu mode="horizontal" router :default-active="activeIndex" ref="rootMenu">
+        <el-menu :default-active="activeIndex" mode="horizontal" ref="rootMenu" router>
           <el-menu-item index="/"><i class="el-icon-s-home"></i>首页</el-menu-item>
           <el-menu-item index="/problem"><i class="el-icon-edit"></i>题目</el-menu-item>
           <el-menu-item index="/contest"><i class="el-icon-tickets"></i>作业</el-menu-item>
-          <el-menu-item index="/rank"><i class="el-icon-info" :active="true"></i>排名</el-menu-item>
+          <el-menu-item index="/rank"><i :active="true" class="el-icon-info"></i>排名</el-menu-item>
           <el-menu-item index="/status"><i class="el-icon-caret-right"></i>状态</el-menu-item>
         </el-menu>
       </el-col>

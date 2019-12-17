@@ -9,20 +9,21 @@
         <span><i class="el-icon-check"></i>解决{{problem.solvedCount}}</span>
       </div>
 
-      <el-tabs v-if="!problem.dbJudge" id="problem-detail-main" type="border-card">
+      <el-tabs id="problem-detail-main" type="border-card" v-if="!problem.dbJudge">
         <el-tab-pane label="题目">
           <problem-info :problem="problem"/>
         </el-tab-pane>
         <el-tab-pane label="提交">
-          <problem-submit :pid="problem.id" :dbJudge="problem.dbJudge" :langOptions="langOptions" :language="language"/>
+          <problem-submit :dbJudge="problem.dbJudge" :langOptions="langOptions" :language="language" :pid="problem.id"/>
         </el-tab-pane>
       </el-tabs>
-      <el-row v-else :gutter="20">
+      <el-row :gutter="20" v-else>
         <el-col :span="16">
           <problem-info :problem="problem"/>
         </el-col>
         <el-col :span="8">
-          <problem-submit id="db-submit" :pid="problem.id" :dbJudge="problem.dbJudge" :langOptions="langOptions" :language="language"/>
+          <problem-submit :dbJudge="problem.dbJudge" :langOptions="langOptions" :language="language" :pid="problem.id"
+                          id="db-submit"/>
         </el-col>
       </el-row>
     </t-zoom-in-top>
@@ -98,10 +99,12 @@ export default {
   #problem-detail {
     width: 100%;
   }
+
   #problem-detail-title {
     text-align: center;
     margin-top: 0px;
   }
+
   #problem-metadata {
     margin-top: -10px;
     color: #303131;
@@ -110,6 +113,7 @@ export default {
     margin-right: auto;
     text-align: center;
   }
+
   #problem-detail-main {
     margin-top: 10px;
     width: 95%;
@@ -117,6 +121,7 @@ export default {
     margin-right: auto;
     min-width: 850px;
   }
+
   #db-submit {
     margin-top: 5px;
   }

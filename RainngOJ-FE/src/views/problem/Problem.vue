@@ -1,28 +1,28 @@
 <template>
   <div id="problem-list" v-loading="loading">
     <t-zoom-in-top>
-      <el-pagination id="problem-list-pagination" layout="prev, pager, next"
-                     background element-loading-spinner="el-icon-more-outline"
-                     v-show="itemCount > pageSize" :page-size="pageSize"
-                     :total="itemCount" @current-change="getPage">
+      <el-pagination :page-size="pageSize" :total="itemCount"
+                     @current-change="getPage" background
+                     element-loading-spinner="el-icon-more-outline" id="problem-list-pagination"
+                     layout="prev, pager, next" v-show="itemCount > pageSize">
       </el-pagination>
 
       <el-table :data="tableData" stripe>
-        <el-table-column prop="id" label="ID" width="75px"/>
+        <el-table-column label="ID" prop="id" width="75px"/>
 
-        <el-table-column prop="title" label="标题">
+        <el-table-column label="标题" prop="title">
           <template slot-scope="scope">
-            <span class="cursor-pointer" @click="showProblem(scope.row.id)">{{scope.row.title}}</span>
+            <span @click="showProblem(scope.row.id)" class="cursor-pointer">{{scope.row.title}}</span>
           </template>
         </el-table-column>
 
-        <el-table-column prop="solvedCount" label="正确" width="75px"/>
-        <el-table-column prop="submitCount" label="提交" width="75px"/>
-        <el-table-column prop="ratio" label="正确率" width="75px"/>
+        <el-table-column label="正确" prop="solvedCount" width="75px"/>
+        <el-table-column label="提交" prop="submitCount" width="75px"/>
+        <el-table-column label="正确率" prop="ratio" width="75px"/>
 
-        <el-table-column v-if="isAdmin" label="操作" width="60px">
+        <el-table-column label="操作" v-if="isAdmin" width="60px">
           <template slot-scope="scope">
-            <span class="problem-edit" @click="editProblem(scope.row.id)">编辑</span>
+            <span @click="editProblem(scope.row.id)" class="problem-edit">编辑</span>
           </template>
         </el-table-column>
 
