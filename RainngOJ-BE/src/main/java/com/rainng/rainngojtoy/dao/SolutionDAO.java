@@ -25,8 +25,14 @@ public class SolutionDAO {
         return PAGE_SIZE;
     }
 
-    public int countSolutions() {
-        return solutionMapper.selectCount(new QueryWrapper<>());
+    public int countSolutions(Integer problemId, Integer userId, Integer result, Integer language) {
+        LambdaQueryWrapper<SolutionEntity> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(problemId != null, SolutionEntity::getProblemId, problemId)
+                .eq(userId != null, SolutionEntity::getUserId, userId)
+                .eq(result != null, SolutionEntity::getResult, result)
+                .eq(language != null, SolutionEntity::getLanguage, language);
+
+        return solutionMapper.selectCount(wrapper);
     }
 
     public int insertSolution(SolutionEntity solutionEntity) {
@@ -46,22 +52,13 @@ public class SolutionDAO {
         wrapper.select(
                 SolutionEntity::getId, SolutionEntity::getProblemId, SolutionEntity::getUserId,
                 SolutionEntity::getResult, SolutionEntity::getTimeCost, SolutionEntity::getMemoryCost,
-                SolutionEntity::getCodeLength, SolutionEntity::getLanguage, SolutionEntity::getSubmitTime);
+                SolutionEntity::getCodeLength, SolutionEntity::getLanguage, SolutionEntity::getSubmitTime)
+                .orderByDesc(SolutionEntity::getId)
+                .eq(problemId != null, SolutionEntity::getProblemId, problemId)
+                .eq(userId != null, SolutionEntity::getUserId, userId)
+                .eq(result != null, SolutionEntity::getResult, result)
+                .eq(language != null, SolutionEntity::getLanguage, language);
 
-        wrapper.orderByDesc(SolutionEntity::getId);
-
-        if (problemId > -1) {
-            wrapper.eq(SolutionEntity::getProblemId, problemId);
-        }
-        if (userId > -1) {
-            wrapper.eq(SolutionEntity::getUserId, userId);
-        }
-        if (result > -1) {
-            wrapper.eq(SolutionEntity::getResult, result);
-        }
-        if (language > -1) {
-            wrapper.eq(SolutionEntity::getLanguage, language);
-        }
 
         Page<SolutionEntity> page = new Page<>(pageIndex, PAGE_SIZE);
 

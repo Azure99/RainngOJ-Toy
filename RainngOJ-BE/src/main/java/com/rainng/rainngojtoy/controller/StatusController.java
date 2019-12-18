@@ -11,17 +11,8 @@ public class StatusController extends BaseController {
     /**
      * 获取分页信息
      */
-    public ResultDTO getPageInfo() {
-        return statusService.getPageInfo();
-    }
-
-    /**
-     * 获取状态页面
-     *
-     * @param index 页面索引
-     */
-    public ResultDTO getStatusPage(Integer index) {
-        return statusService.getStatusPage(index, -1, -1, -1, -1);
+    public ResultDTO getPageInfo(Integer problemId, String username, Integer result, Integer language) {
+        return statusService.getPageInfo(problemId, username, result, language);
     }
 
     /**
@@ -29,12 +20,12 @@ public class StatusController extends BaseController {
      *
      * @param index     页面索引
      * @param problemId 题目Id
-     * @param userId    用户Id
+     * @param username    用户名
      * @param result    评测结果
      * @param language  语言
      */
-    public ResultDTO getStatusPage(Integer index, Integer problemId, Integer userId, Integer result, Integer language) {
-        return statusService.getStatusPage(index, problemId, userId, result, language);
+    public ResultDTO getStatusPage(Integer index, Integer problemId, String username, Integer result, Integer language) {
+        return statusService.getStatusPage(index, problemId, username, result, language);
     }
 
     /**

@@ -8,6 +8,7 @@ import com.rainng.rainngojtoy.models.dto.PageInfoDTO;
 import com.rainng.rainngojtoy.models.dto.ResultDTO;
 import com.rainng.rainngojtoy.models.dto.StatusSolutionDTO;
 import com.rainng.rainngojtoy.models.entity.SolutionEntity;
+import com.rainng.rainngojtoy.models.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,11 +35,30 @@ public class StatusService extends BaseService {
     @Autowired
     private UserDAO userDAO;
 
-    public ResultDTO getPageInfo() {
-        return result(new PageInfoDTO(solutionDAO.countSolutions(), solutionDAO.getPageSize()));
+    public ResultDTO getPageInfo(Integer problemId, String user, Integer result, Integer language) {
+        Integer userId = null;
+        UserEntity entity = userDAO.getUserByUsername(user);
+        if (user != null && entity == null) {
+            return result(new ArrayList<>());
+        }
+        if (user != null) {
+            userId = entity.getId();
+        }
+
+        return result(new PageInfoDTO(solutionDAO.countSolutions(problemId, null, result, language),
+                solutionDAO.getPageSize()));
     }
 
-    public ResultDTO getStatusPage(Integer pageIndex, Integer problemId, Integer userId, Integer result, Integer language) {
+    public ResultDTO getStatusPage(Integer pageIndex, Integer problemId, String user, Integer result, Integer language) {
+        Integer userId = null;
+        UserEntity entity = userDAO.getUserByUsername(user);
+        if (user != null && entity == null) {
+            return result(new ArrayList<>());
+        }
+        if (user != null) {
+            userId = entity.getId();
+        }
+
         List<SolutionEntity> solutions = solutionDAO.getSolutionPage(pageIndex, problemId, userId, result, language);
         List<StatusSolutionDTO> dtoList = new ArrayList<>();
         for (SolutionEntity item : solutions) {

@@ -1,6 +1,43 @@
 <template>
   <div id="status-list" v-loading="loading">
     <t-zoom-in-top>
+      <el-col :span="2">
+        <el-input v-model="queryForm.problemId" placeholder="题目Id" />
+      </el-col>
+      <el-col :span="2">
+        <el-input v-model="queryForm.username" placeholder="用户名" />
+      </el-col>
+      <el-col :span="2">
+      </el-col>
+      <el-col :span="2">
+        <el-select v-model="queryForm.language" placeholder="语言">
+          <el-option label="语言" value=""/>
+          <el-option label="C" value="0"/>
+          <el-option label="C++" value="1"/>
+          <el-option label="Java" value="2"/>
+          <el-option label="Python" value="3"/>
+          <el-option label="MySQL" value="20"/>
+        </el-select>
+      </el-col>
+      <el-col :span="2">
+        <el-select v-model="queryForm.result" placeholder="结果">
+          <el-option label="结果" value=""/>
+          <el-option label="正确" value="0"/>
+          <el-option label="答案错误" value="1"/>
+          <el-option label="编译错误" value="2"/>
+          <el-option label="运行错误" value="3"/>
+          <el-option label="时间超限" value="4"/>
+          <el-option label="内存超限" value="5"/>
+          <el-option label="输出超限" value="6"/>
+          <el-option label="格式错误" value="7"/>
+          <el-option label="等待" value="10"/>
+          <el-option label="评测中" value="11"/>
+        </el-select>
+      </el-col>
+      <el-col :span="2">
+        <el-button @click="getPageInfo">搜索</el-button>
+      </el-col>
+
       <el-pagination :page-size="pageSize" :total="itemCount"
                      @current-change="getPage" background
                      element-loading-spinner="el-icon-more-outline"
@@ -53,14 +90,24 @@ export default {
       loading: true,
       itemCount: 20,
       pageSize: 20,
-      tableData: []
+      tableData: [],
+      queryForm: {
+        problemId: '',
+        username: '',
+        result: '',
+        language: ''
+      }
     }
   },
   methods: {
     getPage (index) {
       this.loading = true
       this.$ajax.get('/status/getStatusPage', {
-        index: index
+        index: index,
+        problemId: this.queryForm.problemId,
+        username: this.queryForm.username,
+        result: this.queryForm.result,
+        language: this.queryForm.language
       }).then(res => {
         for (let i = 0; i < res.length; i++) {
           this.setResultFields(res[i])
@@ -120,6 +167,13 @@ export default {
     },
     isRunning (res) {
       return res === 10 || res === 11
+    },
+    getPageInfo () {
+      this.$ajax.get('/status/getPageInfo', this.queryForm).then(res => {
+        this.itemCount = res.itemCount
+        this.pageSize = res.pageSize
+        this.getPage(1)
+      })
     }
   },
   computed: {
@@ -131,11 +185,7 @@ export default {
     }
   },
   created () {
-    this.$ajax.get('/status/getPageInfo').then(res => {
-      this.itemCount = res.itemCount
-      this.pageSize = res.pageSize
-      this.getPage(1)
-    })
+    this.getPageInfo()
   }
 }
 </script>
@@ -149,7 +199,7 @@ export default {
   }
 
   #status-list-pagination {
-    text-align: center;
+    text-align: right;
   }
 
   .status-list-problemid {
