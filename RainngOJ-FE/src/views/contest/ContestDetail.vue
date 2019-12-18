@@ -54,7 +54,11 @@ export default {
 
       let problems = res.problems
       for (let i = 0; i < problems.length; i++) {
-        problems[i].ratio = Math.round((problems[i].solvedCount / problems[i].submitCount) * 100 * 100) / 100 + '%'
+        if (problems[i].submitCount === 0) {
+          problems[i].ratio = '0%'
+        } else {
+          problems[i].ratio = Math.round((problems[i].solvedCount / problems[i].submitCount) * 100 * 100) / 100 + '%'
+        }
       }
 
       this.loading = false
