@@ -15,6 +15,7 @@ import com.rainng.rainngojtoy.models.entity.SolutionErrorEntity;
 import com.rainng.rainngojtoy.models.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class JudgeService extends BaseService {
         return result(judgeTasks);
     }
 
+    @Transactional
     public ResultDTO submitResult(JudgeResultDTO result) {
         SolutionEntity solution = solutionDAO.getSolutionById(result.getSubmitId());
         if (solution == null) {

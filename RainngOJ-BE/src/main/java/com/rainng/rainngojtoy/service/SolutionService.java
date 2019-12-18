@@ -10,6 +10,7 @@ import com.rainng.rainngojtoy.models.entity.SolutionEntity;
 import com.rainng.rainngojtoy.models.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 
@@ -35,6 +36,7 @@ public class SolutionService extends BaseService {
     @Autowired
     private UserDAO userDAO;
 
+    @Transactional
     public ResultDTO submitSolution(Integer problemId, Integer userId, Integer language, String sourceCode) {
         ProblemEntity problem = problemDAO.getProblemById(problemId);
         UserEntity user = userDAO.getUserById(userId);
