@@ -17,8 +17,10 @@ public class ProblemDAO {
     @Autowired
     private ProblemMapper problemMapper;
 
-    public Integer countProblems() {
-        return problemMapper.selectCount(new QueryWrapper<>());
+    public Integer countProblems(String problemTitle) {
+        LambdaQueryWrapper<ProblemEntity> wrapper = new LambdaQueryWrapper<>();
+        wrapper.like(problemTitle != null, ProblemEntity::getTitle, problemTitle);
+        return problemMapper.selectCount(wrapper);
     }
 
     public Integer getPageSize() {
@@ -29,11 +31,12 @@ public class ProblemDAO {
         return problemMapper.updateById(problemEntity);
     }
 
-    public List<ProblemEntity> getProblemPage(Integer pageIndex) {
+    public List<ProblemEntity> getProblemPage(Integer pageIndex, String problemTitle) {
         LambdaQueryWrapper<ProblemEntity> wrapper = new LambdaQueryWrapper<>();
         wrapper.select(
                 ProblemEntity::getId, ProblemEntity::getTitle,
-                ProblemEntity::getSolvedCount, ProblemEntity::getSubmitCount);
+                ProblemEntity::getSolvedCount, ProblemEntity::getSubmitCount)
+        .like(problemTitle != null, ProblemEntity::getTitle, problemTitle);
 
         wrapper.orderByAsc(ProblemEntity::getId);
 

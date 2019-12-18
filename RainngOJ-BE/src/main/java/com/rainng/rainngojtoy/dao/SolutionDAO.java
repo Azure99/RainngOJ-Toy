@@ -74,10 +74,6 @@ public class SolutionDAO {
                 SolutionEntity::getId, SolutionEntity::getResult,
                 SolutionEntity::getTimeCost, SolutionEntity::getMemoryCost);
 
-        for (int a : ids) {
-            System.out.println(a);
-        }
-
         wrapper.in(SolutionEntity::getId, ids);
 
         return solutionMapper.selectList(wrapper);

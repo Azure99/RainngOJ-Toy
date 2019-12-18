@@ -15,8 +15,8 @@ public class ProblemController extends BaseController {
     /**
      * 获取分页信息
      */
-    public ResultDTO getPageInfo() {
-        return problemService.getPageInfo();
+    public ResultDTO getPageInfo(String problemTitle) {
+        return problemService.getPageInfo(problemTitle);
     }
 
     /**
@@ -24,8 +24,8 @@ public class ProblemController extends BaseController {
      *
      * @param index 页面索引
      */
-    public ResultDTO getProblemPage(Integer index) {
-        return problemService.getProblemPage(index);
+    public ResultDTO getProblemPage(Integer index, String problemTitle) {
+        return problemService.getProblemPage(index, problemTitle);
     }
 
     /**

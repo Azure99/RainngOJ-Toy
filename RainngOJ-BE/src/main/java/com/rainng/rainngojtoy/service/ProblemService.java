@@ -25,13 +25,13 @@ public class ProblemService extends BaseService {
     @Autowired
     private ProblemDAO problemDAO;
 
-    public ResultDTO getPageInfo() {
-        PageInfoDTO pageInfoDTO = new PageInfoDTO(problemDAO.countProblems(), problemDAO.getPageSize());
+    public ResultDTO getPageInfo(String problemTitle) {
+        PageInfoDTO pageInfoDTO = new PageInfoDTO(problemDAO.countProblems(problemTitle), problemDAO.getPageSize());
         return result(pageInfoDTO);
     }
 
-    public ResultDTO getProblemPage(Integer pageIndex) {
-        return result(problemDAO.getProblemPage(pageIndex));
+    public ResultDTO getProblemPage(Integer pageIndex, String problemTitle) {
+        return result(problemDAO.getProblemPage(pageIndex, problemTitle));
     }
 
     public ResultDTO getProblemById(Integer id) {

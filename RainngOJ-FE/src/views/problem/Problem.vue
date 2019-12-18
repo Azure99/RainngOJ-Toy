@@ -1,6 +1,13 @@
 <template>
   <div id="problem-list" v-loading="loading">
     <t-zoom-in-top>
+      <el-col :span="3">
+        <el-input v-model="queryForm.problemTitle" placeholder="题目标题" />
+      </el-col>
+      <el-col :span="3">
+        <el-button @click="getPageInfo">搜索</el-button>
+      </el-col>
+
       <el-pagination :page-size="pageSize" :total="itemCount"
                      @current-change="getPage" background
                      element-loading-spinner="el-icon-more-outline" id="problem-list-pagination"
@@ -39,14 +46,18 @@ export default {
       loading: true,
       itemCount: 20,
       pageSize: 20,
-      tableData: []
+      tableData: [],
+      queryForm: {
+        problemTitle: ''
+      }
     }
   },
   methods: {
     getPage (index) {
       this.loading = true
       this.$ajax.get('/problem/getProblemPage', {
-        index: index
+        index: index,
+        problemTitle: this.queryForm.problemTitle
       }).then(res => {
         for (let i = 0; i < res.length; i++) {
           if (res[i].submitCount === 0) {
@@ -58,6 +69,15 @@ export default {
 
         this.tableData = res
         this.loading = false
+      })
+    },
+    getPageInfo () {
+      this.$ajax.get('/problem/getPageInfo', {
+        problemTitle: this.queryForm.problemTitle
+      }).then(res => {
+        this.itemCount = res.itemCount
+        this.pageSize = res.pageSize
+        this.getPage(1)
       })
     },
     showProblem (id) {
@@ -73,11 +93,7 @@ export default {
     }
   },
   created () {
-    this.$ajax.get('/problem/getPageInfo').then(res => {
-      this.itemCount = res.itemCount
-      this.pageSize = res.pageSize
-      this.getPage(1)
-    })
+    this.getPageInfo()
   }
 }
 </script>
@@ -90,7 +106,7 @@ export default {
   }
 
   #problem-list-pagination {
-    text-align: center;
+    text-align: right;
   }
 
   .cursor-pointer {

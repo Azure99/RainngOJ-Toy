@@ -21,6 +21,12 @@ public class BaseController extends Controller {
      */
     @Override
     protected IResult beforeExecute(HttpContext context, Method method, Object[] argValues) {
+        try {
+            Thread.sleep(150);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
         boolean needAuth = method.getDeclaredAnnotation(Auth.class) != null;
         if (needAuth && !checkLogin()) {
             return json(new ResultDTO(ResultDTO.NO_LOGIN, "请先登录", null));
