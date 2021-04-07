@@ -2,9 +2,9 @@ package com.rainng.rainngojtoy.controller;
 
 import com.rainng.jerry.mouse.http.HttpContext;
 import com.rainng.jerry.mouse.http.map.HttpSessionMap;
-import com.rainng.jerry.webapi.Controller;
-import com.rainng.jerry.webapi.annotation.Route;
-import com.rainng.jerry.webapi.result.IResult;
+import com.rainng.jerry.mvc.Controller;
+import com.rainng.jerry.mvc.annotation.Route;
+import com.rainng.jerry.mvc.result.Result;
 import com.rainng.rainngojtoy.manager.UserManager;
 import com.rainng.rainngojtoy.manager.annotation.Admin;
 import com.rainng.rainngojtoy.manager.annotation.Auth;
@@ -20,7 +20,7 @@ public class BaseController extends Controller {
      * 请求过滤(Auth 与 Admin注解授权验证)
      */
     @Override
-    protected IResult beforeExecute(HttpContext context, Method method, Object[] argValues) {
+    protected Result beforeExecute(HttpContext context, Method method, Object[] argValues) {
         try {
             Thread.sleep(150);
         } catch (InterruptedException ex) {

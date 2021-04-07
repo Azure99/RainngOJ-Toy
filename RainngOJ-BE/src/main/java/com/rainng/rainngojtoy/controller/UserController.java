@@ -2,7 +2,7 @@ package com.rainng.rainngojtoy.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.rainng.jerry.mouse.http.map.HttpSessionMap;
-import com.rainng.jerry.webapi.annotation.Post;
+import com.rainng.jerry.mvc.annotation.HttpPost;
 import com.rainng.rainngojtoy.manager.annotation.Admin;
 import com.rainng.rainngojtoy.models.dto.ResultDTO;
 import com.rainng.rainngojtoy.service.UserService;
@@ -21,7 +21,7 @@ public class UserController extends BaseController {
      *
      * @param data 请求数据
      */
-    @Post
+    @HttpPost
     public ResultDTO login(JSONObject data) {
         String username = data.getString("username");
         String password = data.getString("password");
@@ -55,7 +55,7 @@ public class UserController extends BaseController {
      *
      * @param data 请求数据
      */
-    @Post
+    @HttpPost
     public ResultDTO register(JSONObject data) {
         String username = data.getString("username");
         String password = data.getString("password");

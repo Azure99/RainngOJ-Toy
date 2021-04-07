@@ -1,6 +1,6 @@
 package com.rainng.rainngojtoy.controller;
 
-import com.rainng.jerry.webapi.annotation.Route;
+import com.rainng.jerry.mvc.annotation.Route;
 import org.springframework.stereotype.Controller;
 
 @Controller

@@ -1,7 +1,7 @@
 package com.rainng.rainngojtoy.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.rainng.jerry.webapi.annotation.Post;
+import com.rainng.jerry.mvc.annotation.HttpPost;
 import com.rainng.rainngojtoy.manager.LanguageManager;
 import com.rainng.rainngojtoy.manager.UserManager;
 import com.rainng.rainngojtoy.manager.annotation.Auth;
@@ -21,7 +21,7 @@ public class SolutionController extends BaseController {
      * @param data 请求数据
      */
     @Auth
-    @Post
+    @HttpPost
     public ResultDTO submitSolution(JSONObject data) {
         Integer problemId = data.getInteger("problemId");
         String sourceCode = data.getString("sourceCode");

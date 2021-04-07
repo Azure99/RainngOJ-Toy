@@ -30,7 +30,7 @@ public class UserManager {
         status.setUsername(username);
         status.setAdmin(isAdmin);
 
-        session.set(SESSION_USER_STATUS, status);
+        session.put(SESSION_USER_STATUS, status);
     }
 
     public LoginStatusDTO getLoginStatus(HttpSessionMap session) {
