@@ -1,6 +1,7 @@
 package com.rainng.rainngojtoy.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.rainng.jerry.mvc.annotation.RequestBody;
 import com.rainng.rainngojtoy.manager.annotation.Admin;
 import com.rainng.rainngojtoy.manager.annotation.Auth;
 import com.rainng.rainngojtoy.models.dto.ResultDTO;
@@ -44,7 +45,7 @@ public class ProblemController extends BaseController {
      * @param data 请求数据
      */
     @Admin
-    public ResultDTO updateProblem(JSONObject data) {
+    public ResultDTO updateProblem(@RequestBody JSONObject data) {
         ProblemEntity problem = data.toJavaObject(ProblemEntity.class);
 
         if (problem.getId() == null || problem.getTitle() == null || problem.getDescription() == null ||

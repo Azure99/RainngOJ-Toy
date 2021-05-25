@@ -3,6 +3,7 @@ package com.rainng.rainngojtoy.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.rainng.jerry.mouse.http.map.HttpSessionMap;
 import com.rainng.jerry.mvc.annotation.HttpPost;
+import com.rainng.jerry.mvc.annotation.RequestBody;
 import com.rainng.rainngojtoy.manager.annotation.Admin;
 import com.rainng.rainngojtoy.models.dto.ResultDTO;
 import com.rainng.rainngojtoy.service.UserService;
@@ -22,7 +23,7 @@ public class UserController extends BaseController {
      * @param data 请求数据
      */
     @HttpPost
-    public ResultDTO login(JSONObject data) {
+    public ResultDTO login(@RequestBody JSONObject data) {
         String username = data.getString("username");
         String password = data.getString("password");
 
@@ -56,7 +57,7 @@ public class UserController extends BaseController {
      * @param data 请求数据
      */
     @HttpPost
-    public ResultDTO register(JSONObject data) {
+    public ResultDTO register(@RequestBody JSONObject data) {
         String username = data.getString("username");
         String password = data.getString("password");
         String nickname = data.getString("nickname");
@@ -92,3 +93,4 @@ public class UserController extends BaseController {
         return userService.lockOrUnlock(id);
     }
 }
+

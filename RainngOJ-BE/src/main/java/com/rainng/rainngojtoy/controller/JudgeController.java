@@ -1,6 +1,7 @@
 package com.rainng.rainngojtoy.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.rainng.jerry.mvc.annotation.RequestBody;
 import com.rainng.rainngojtoy.manager.JudgeManager;
 import com.rainng.rainngojtoy.models.dto.JudgeResultDTO;
 import com.rainng.rainngojtoy.models.dto.ResultDTO;
@@ -17,7 +18,7 @@ public class JudgeController extends BaseController {
      *
      * @param data 请求数据
      */
-    public ResultDTO getPending(JSONObject data) {
+    public ResultDTO getPending(@RequestBody JSONObject data) {
         if (!judgeManager.authJudger(data)) {
             return wrongTokenResult();
         }
@@ -30,7 +31,7 @@ public class JudgeController extends BaseController {
      *
      * @param data 请求数据
      */
-    public ResultDTO getTestData(JSONObject data) {
+    public ResultDTO getTestData(@RequestBody JSONObject data) {
         if (!judgeManager.authJudger(data)) {
             return wrongTokenResult();
         }
@@ -44,7 +45,7 @@ public class JudgeController extends BaseController {
      *
      * @param data 请求数据
      */
-    public ResultDTO submitResult(JSONObject data) {
+    public ResultDTO submitResult(@RequestBody JSONObject data) {
         if (!judgeManager.authJudger(data)) {
             return wrongTokenResult();
         }

@@ -2,6 +2,7 @@ package com.rainng.rainngojtoy.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.rainng.jerry.mvc.annotation.HttpPost;
+import com.rainng.jerry.mvc.annotation.RequestBody;
 import com.rainng.rainngojtoy.manager.LanguageManager;
 import com.rainng.rainngojtoy.manager.UserManager;
 import com.rainng.rainngojtoy.manager.annotation.Auth;
@@ -22,7 +23,7 @@ public class SolutionController extends BaseController {
      */
     @Auth
     @HttpPost
-    public ResultDTO submitSolution(JSONObject data) {
+    public ResultDTO submitSolution(@RequestBody JSONObject data) {
         Integer problemId = data.getInteger("problemId");
         String sourceCode = data.getString("sourceCode");
         Integer language = data.getInteger("language");
